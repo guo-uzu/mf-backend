@@ -25,7 +25,10 @@ async def scrape_data_async(request):
     ]
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch()
+        browser = await p.chromium.launch(
+            executable_path="/opt/render/.cache/ms-playwright/chromium-1155/chrome-linux/chrome",
+            headless=True,
+        )
         page = await browser.new_page()
         await page.goto(URL, wait_until="load", timeout=120000)
 
